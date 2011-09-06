@@ -5,29 +5,33 @@ source 'http://rubygems.org'
 SOURCE         = ENV.fetch('SOURCE', :git).to_sym
 REPO_POSTFIX   = SOURCE == :path ? ''                                : '.git'
 DATAMAPPER     = SOURCE == :path ? Pathname(__FILE__).dirname.parent : 'http://github.com/datamapper'
-DM_VERSION     = '~> 1.1.0'
+DM_VERSION     = '~> 1.2.0.rc1'
 DO_VERSION     = '~> 0.10.6'
+RAILS_VERSION  = '~> 3.1.0'
 DM_DO_ADAPTERS = %w[ sqlite postgres mysql oracle sqlserver ]
 
-gem 'dm-core', DM_VERSION, SOURCE => "#{DATAMAPPER}/dm-core#{REPO_POSTFIX}"
-gem 'actionpack',      '~> 3.1.0.rc4', :require => 'action_pack'
+# DataMapper dependencies
+gem 'dm-core',         DM_VERSION, SOURCE => "#{DATAMAPPER}/dm-core#{REPO_POSTFIX}"
 gem 'dm-active_model', DM_VERSION, SOURCE => "#{DATAMAPPER}/dm-active_model#{REPO_POSTFIX}"
-gem 'railties',        '~> 3.1.0.rc4', :require => 'rails'
+
+# Rails dependencies
+gem 'actionpack', RAILS_VERSION, :require => 'action_pack'
+gem 'railties',   RAILS_VERSION, :require => 'rails'
 
 group :development do
 
-  gem 'jeweler', '~> 1.5.2'
-  gem 'rake',    '~> 0.8.7'
-  gem 'rspec',   '~> 1.3.1'
+  gem 'jeweler', '~> 1.6.4'
+  gem 'rake',    '~> 0.9.2'
+  gem 'rspec',   '~> 1.3.2'
 
 end
 
 platforms :mri_18 do
   group :quality do
 
-    gem 'rcov',      '~> 0.9.9'
-    gem 'yard',      '~> 0.6'
-    gem 'yardstick', '~> 0.2'
+    gem 'rcov',      '~> 0.9.10'
+    gem 'yard',      '~> 0.7.2'
+    gem 'yardstick', '~> 0.4'
 
   end
 end
